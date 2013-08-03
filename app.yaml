@@ -2,11 +2,33 @@ application: project-cmdrdata
 version: 1
 runtime: python27
 api_version: 1
-threadsafe: true
+threadsafe: false
+
+## Uncomment to enable App Engine appstats
+# builtins:
+# - appstats: on
 
 handlers:
+- url: /_checkin/.*
+  script: main.py
+  login: admin
+  secure: always
+
+- url: /oauth.*
+  script: main.py
+  secure: always
+
+- url: /.*favicon.ico
+  static_files: img/favicon.ico
+  upload: img/favicon.ico
+  expiration: 0
+
+- url: /img
+  static_dir: img
+
 - url: /.*
-  script: main.app
+  script: main.py
+  secure: always
 
 libraries:
 - name: webapp2
