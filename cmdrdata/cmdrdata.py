@@ -11,7 +11,6 @@ from abstract_app import AbstractApp
 
 
 class CmdrData(AbstractApp):
-  
   # A user who has authorized your app has checked in. This runs inside
   # AppEngine's task queue, and contains the check-in payload for you to
   # process.
@@ -20,6 +19,6 @@ class CmdrData(AbstractApp):
     
     message = 'Yo 4sq.'
     self.makeContentInfo(checkin_json = checkin_json,
-                          content = json.dumps({}),
-                          text = message,
-                          reply = True)
+                         content = json.dumps({}),
+                         text = message,
+                         reply = True)
