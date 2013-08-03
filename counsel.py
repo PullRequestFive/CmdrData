@@ -19,7 +19,7 @@ class GenerateCounsel(webapp2.RequestHandler):
     epoch_seconds = time.mktime(t.timetuple())
     limit = 100
     parameters = 'limit=%s&afterTimestamp=%s' % (limit, epoch_seconds)
-    week_checkins = urllib2.urlopen('https://api.foursquare.com/v2/users/%s/checkins?' + parameter % user_id)
+    week_checkins = urllib2.urlopen('https://api.foursquare.com/v2/users/%s/checkins?' + parameters % user_id)
     c_json = json.loads(week_checkins.response)
     logging.debug('Received the following JSON response from 4sq: %s', c_json)
     checkins = c_json['items']['checkins']
@@ -28,5 +28,4 @@ class GenerateCounsel(webapp2.RequestHandler):
       categories = c['venue']['categories']
       for category in categories:
         if category['primary']:
-          name = category['name']
-          frequency[name] += 1
+          frequency[category['name']] += 1
