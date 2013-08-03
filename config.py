@@ -7,7 +7,7 @@ CONFIG = {
   # The server name for local_dev mode. Make sure the port matches what you use.
   'local_server': 'http://localhost:8080',
   # Server name for your deployed AppEngine instance
-  'prod_server': None,
+  'prod_server': 'project-cmdrdata',
   # OAuth client ID. Must match what you set at https://foursquare.com/oauth.
   'client_id': 'LNB0FOSEKS4QPOQW2HTAXVRGQIBU22RAP4PWVCIHILK3DSUF',
   # OAuth callback/redirect URI. Must match what you set at https://foursquare.com/oauth.
@@ -35,5 +35,5 @@ CONFIG = {
 
 # Replace 'None' with the class object of your app. It must inherit from the
 # provided AbstractApp class.
-# import  YOUR_CLASS_HERE
-APP_CLASS = None
+from cmdrdata.cmdrdata import CmdrData
+APP_CLASS = CmdrData
