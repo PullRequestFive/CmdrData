@@ -9,7 +9,7 @@ CONFIG = {
   # Server name for your deployed AppEngine instance
   'prod_server': None,
   # OAuth client ID. Must match what you set at https://foursquare.com/oauth.
-  'client_id': None,
+  'client_id': 'LNB0FOSEKS4QPOQW2HTAXVRGQIBU22RAP4PWVCIHILK3DSUF',
   # OAuth callback/redirect URI. Must match what you set at https://foursquare.com/oauth.
   'redirect_uri': '%s/oauth', # (server)
   # Format string to serve URL content out of. Not necessarily required.
