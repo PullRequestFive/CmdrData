@@ -1,4 +1,5 @@
 import logging
+import message
 import os
 import random
 
@@ -17,8 +18,8 @@ class CmdrData(AbstractApp):
   def checkinTaskQueue(self, client, checkin_json):
     venue_json = client.venues(venue_id)['venue']
     
-    message = 'Yo 4sq.'
-    self.makeContentInfo(checkin_json = checkin_json,
-                         content = json.dumps({}),
-                         text = message,
-                         reply = True)
+    self.makeContentInfo(
+        checkin_json = checkin_json,
+        content = json.dumps({}),
+        text = message.GetText(category, frequency),
+        reply = True)
