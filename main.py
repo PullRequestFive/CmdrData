@@ -11,4 +11,7 @@ class CheckinHandler
 def SendMsg(category, frequency, check_in):
   pass
 
-app = webapp2.WSGIApplication([ ('/', RootHandler), ], debug=True)
+app = webapp2.WSGIApplication([
+  ('/', RootHandler),
+  ('/counsel', CheckinHandler),
+  ], debug=True)
