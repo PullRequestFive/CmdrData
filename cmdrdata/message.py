@@ -1,11 +1,5 @@
-import urllib2
+import json
 
-def Send(category, frequency, check_in):
-  url = "https://api.foursquare.com/v2/checkins/CHECKIN_ID/reply"
-  text = "This is a test message."
-
-  try:
-    result = urllib2.urlopen(url)
-  except urllib2.URLError, e:
-      handleError(e)
-
+def GetText(category, frequency):
+  data = json.load(open('messages.json'))
+  return data[category][str(frequency)]
