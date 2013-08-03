@@ -19,26 +19,25 @@ class CmdrData(AbstractApp):
   # AppEngine's task queue, and contains the check-in payload for you to
   # process.
   def checkinTaskQueue(self, client, checkin_json):
-    venue_json = client.venues(venue_id)['venue']
+    logging.debug('Current checkin: %s', checkin_json)
     user_id = checkin_json['user']['id']
-    category_name = checkin_json['venue']['categories']['name']
+    categories = checkin_json['venue']['categories']
+    category_name = find_primary_category(categories)
 
     now = datetime.datetime.now()
     tsd = datetime.timedelta(days=7)
     t = now - tsd
-    epoch_seconds = time.mktime(t.timetuple())
+    epoch_seconds = int(time.mktime(t.timetuple()))
     limit = 100
     parameters = {'limit': limit,
                   'afterTimestamp': epoch_seconds}
     week_checkins = client.users.checkins(user_id, parameters)
     logging.debug('Received the following JSON response from 4sq: %s', week_checkins)
-    checkins = week_checkins['items']['checkins']
+    checkins = week_checkins['checkins']['items']
     frequency = collections.defaultdict(int)
     for c in checkins:
       categories = c['venue']['categories']
-      for category in categories:
-        if category['primary']:
-          frequency[category['name']] += 1
+      frequency[find_primary_category(categories)] += 1
     message_text = message.GetText(category_name, frequency[category_name])
     if message_text:
       self.makeContentInfo(
@@ -46,3 +45,8 @@ class CmdrData(AbstractApp):
           content = json.dumps({}),
           text = message_text,
           reply = True)
+
+def find_primary_category(categories):
+  for category in categories:
+    if category['primary']:
+      return category['name']
