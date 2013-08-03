@@ -2,6 +2,9 @@ import logging
 import message
 import os
 import random
+import datetime
+import time
+import collections
 
 from google.appengine.ext.webapp import template
 
@@ -10,11 +13,6 @@ except ImportError: import json
 
 from abstract_app import AbstractApp
 
-import webapp2
-import urllib2
-import datetime
-import time
-import collections
 
 class CmdrData(AbstractApp):
   # A user who has authorized your app has checked in. This runs inside
